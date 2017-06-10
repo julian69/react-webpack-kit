@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    
+    <!-- The title is generated in "webpack.config.js" -->
+    <title><%= htmlWebpackPlugin.options.title %></title> 
+
+    <!-- 
+    	<script>, <link>
+    	tags for our local files are generated automatically inside the dist/index.html 
+    	"Favicon": It's also generated in "webpack.config.js"
+    -->
+
+  </head>
+  <body>
+  	
+  	<div id="root"></div>
+  	<!-- We need to pass the img path this way because of the webpack file plugin -->
+  	<!-- <img src=<%= require('./app/assets/img/html5.png') %>> -->
+  	
+  </body>
+</html>

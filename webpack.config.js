@@ -1,0 +1,86 @@
+const path = require("path");
+const glob = require('glob');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // This plugin handles all the HTML stuff
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); // This plugin extracts the app's css and injects it in a single file
+const PurifyCSSPlugin = require('purifycss-webpack');
+
+const DIST_DIR = path.resolve(__dirname, "dist");
+const SRC_DIR = path.resolve(__dirname, "src");
+
+// Check what enviroment we are in and set the right configuration 
+const isProd = process.env.NODE_ENV === "production"; // assess node env caming from package.json
+const cssDev = ["style-loader", "css-loader", "sass-loader"]; // for dev enviroment
+const cssProd =  ExtractTextPlugin.extract({ // for prod enviroment
+			          fallback: 'style-loader',
+			          use: ['css-loader', 'sass-loader'],
+			          // publicPath: '/'
+		        });
+const cssConfig = isProd ? cssProd : cssDev; // chose the right css configuration depending on the enviroment
+
+module.exports = {
+	entry: {
+		app: SRC_DIR + '/app/index.js'
+	},
+	output: {
+        path: DIST_DIR,
+        filename: '[name].bundle.js' // THis goes to the dist folder and contains all the compiled js code
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+		        use: cssConfig
+            },
+            { 
+            	test: /\.jsx?$/, // replace by jsx
+            	exclude: /node_modules/, 
+            	use: "babel-loader" 
+            },
+            {
+            	test: /\.(jpe?g|png|gif|svg)$/i,
+            	use: [
+            		// "file-loader?name=[name].[ext]&outputPath=img/&publicPath=img/",
+            		"file-loader?name=[hash:6].[ext]&outputPath=img/", // this will collect all the img and move them to dist
+            		"image-webpack-loader" // image optimization
+            	] 
+            }
+        ]
+    },
+    devServer: { // Development server configuration
+        contentBase: DIST_DIR,
+        compress: true, 
+        port: 9000,
+        hot: true,
+        stats: "errors-only",
+        open: true
+    },
+	plugins: [
+		new HtmlWebpackPlugin({
+            title: 'Project Demo', // The title for the HTML file
+            // favicon: '', // our project's favicon
+            minify: {
+                collapseWhitespace: true // Minify the HTML
+            },
+            hash: true, // Add a hash at the end of the script/linkk URL
+            chunks: ['app'], // this is just in case we run multimple entries. It picks up only app's chunks 
+            template: './src/index.html', // Load a custom template
+        }),
+        new ExtractTextPlugin({
+            filename: 'styles.css',
+            disable: !isProd,
+            allChunks: true
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new PurifyCSSPlugin({
+         	paths: glob.sync(path.join(__dirname, 'src/*.html')), // given the ccase we are using an css library, it'll load only the css we need
+	    }),
+	    new webpack.DefinePlugin({ // this allows us to declare global variables as to acces them from our app
+			  PROD_API: JSON.stringify('production api'),
+			  DEV_API: JSON.stringify("development api")
+		})
+	]
+}
