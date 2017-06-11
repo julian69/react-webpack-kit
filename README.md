@@ -1,3 +1,4 @@
+
 # React-Webpack-Kit
 
 From the command line:
@@ -12,3 +13,9 @@ From the command line:
 
 - Add testing
 - Add Bootstrap (optional)
+
+# NOTE
+
+if you run into this issue "Module build failed: Error: dyld: Library" when trying to install it on mac, just try this:
+
+- brew install libpng 
