@@ -29,7 +29,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "prod": "npm run clean && cross-env NODE_ENV=production webpack -p",
     "clean": "rimraf ./dist/*",
     "test": "cross-env NODE_ENV=test mocha --require babel-register tests/*.js --reporter spec||exit 0"
