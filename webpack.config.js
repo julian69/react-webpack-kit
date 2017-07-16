@@ -23,7 +23,7 @@ var enviroment = process.env.NODE_ENV;
     			          use: ['css-loader', 'sass-loader'],
     			          // publicPath: '/'
     		        });
-    var cssConfig = isProd ? cssProd : cssDev; // chose the right css configuration depending on the enviroment
+    var cssConfig = isProd ? cssProd : cssDev; // choose the right css configuration depending on the enviroment
 
     // ========= Enviroment configuration ========= \\
     var API_URL;
@@ -32,10 +32,13 @@ var enviroment = process.env.NODE_ENV;
     
         case 'development':
                 API_URL = "development API URL";
+                cssConfig = cssDev;
+
         break;
 
         case 'production':
                 API_URL = "production API URL";
+                cssConfig = cssProd;
         break;
     }
 
@@ -79,7 +82,9 @@ var enviroment = process.env.NODE_ENV;
             port: 9000,
             hot: true,
             stats: "errors-only",
-            open: true
+            open: true,
+            openPage: '' // Workaround to prevent the addition of "undefined" in the URL
+            // Link to issue on webpack-dev-server version: https://github.com/webpack/webpack-dev-server/issues/960
         },
     	plugins: [
     		new HtmlWebpackPlugin({

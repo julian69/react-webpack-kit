@@ -5,6 +5,8 @@ From the command line:
 
 - git clone https://github.com/julian69/react-webpack-kit.git
 - npm install
+- (OPTIONAL) npm install -g npm-check-updates (update dependencies version)
+	- ncu -u
 - npm run dev (development)
 - npm run prod (production)
 
