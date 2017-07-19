@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { User } from "../../components/UserComponent/UserComponent";
-import { Main } from "../../components/MainComponent/MainComponent";
-import { setName } from "../../actions/userActions"
+import { Sidenav } from "../../components/SidenavComponent/SidenavComponent";
+import { sidenavActions } from "../../actions/sidenavActions"
 
 class App extends React.Component {
-    
+ 
     render() {
+    	
         return (
-            <div className="container">
-                <Main changeUsername={ () => this.props.setName("Julieta") }/>
-                <User username={ this.props.user.name } />
+            <div>
+                <Sidenav toggleSidenavStatus={ () => this.props.sidenavActions( this.props.sidenav.status = !this.props.sidenav.status ) }
+                		 sidenavStatus={ this.props.sidenav.status } />
             </div>
         );
     }
@@ -19,15 +19,14 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.user,
-		math: state.math
+		sidenav: state.sidenav
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setName: (name) => {
-			dispatch( setName(name) );
+		sidenavActions: (status) => {
+			dispatch( sidenavActions(status) );
 		}
 	};
 };

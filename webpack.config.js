@@ -96,7 +96,7 @@ const path = require("path"),
             hot: true,
             stats: "errors-only",
             open: true,
-            openPage: "" // Workaround to prevent the addition of "undefined" in the URL
+            // openPage: "" // Workaround to prevent the addition of "undefined" in the URL
             // Link to issue on webpack-dev-server version: https://github.com/webpack/webpack-dev-server/issues/960
         },
     	plugins: [
