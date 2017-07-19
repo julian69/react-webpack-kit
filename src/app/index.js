@@ -1,10 +1,15 @@
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+
+import App from "./containers/AppContainer/AppContainer";
+import store from "./store";
+
 const css = require("./assets/scss/main.scss");
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Hello} from './components/HelloComponent/HelloComponent';
-
-ReactDOM.render(
-   <Hello />,
-   document.getElementById('root')
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+   , window.document.getElementById('app')
 );

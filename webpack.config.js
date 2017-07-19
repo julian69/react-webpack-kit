@@ -1,42 +1,44 @@
-var path = require("path");
-var glob = require('glob');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin'); // This plugin handles all the HTML stuff
-var ExtractTextPlugin = require("extract-text-webpack-plugin"); // This plugin extracts the app's css and injects it in a single file
-var PurifyCSSPlugin = require('purifycss-webpack');
+const path = require("path"),
+      glob = require("glob"),
+      webpack = require("webpack"),
+      HtmlWebpackPlugin = require("html-webpack-plugin"), 
+      ExtractTextPlugin = require("extract-text-webpack-plugin"),
+      PurifyCSSPlugin = require("purifycss-webpack"),
 
-var DIST_DIR = path.resolve(__dirname, "dist");
-var SRC_DIR = path.resolve(__dirname, "src");
-var enviroment = process.env.NODE_ENV;
+      DIST_DIR = path.resolve(__dirname, "dist"),
+      SRC_DIR = path.resolve(__dirname, "src"),
+      enviroment = process.env.NODE_ENV;
 
 // ========= Check what enviroment we are in and set the values acordingly ========= \\ 
     
-    var isProd = enviroment === "production"; // assess node env coming from package.json
-    var cssConfig;
-    var cssDev = [ // for dev enviroment
+    let cssConfig, 
+        bootstrapConfig,
+        API_URL;
+
+    const cssDev = [ 
         "style-loader", 
         "css-loader", 
         "sass-loader"
     ]; 
-    var cssProd =  ExtractTextPlugin.extract({ // for prod enviroment
-    			          fallback: 'style-loader',
-    			          use: ['css-loader', 'sass-loader'],
-    			          // publicPath: '/'
+
+    const cssProd = ExtractTextPlugin.extract({ 
+    			          fallback: "style-loader",
+    			          use: [
+                              "css-loader", 
+                              "sass-loader"
+                          ],
+    			          // publicPath: '../' // This helped getting the images in the css files ( url(bla bla) )
     		        });
-    var cssConfig = isProd ? cssProd : cssDev; // choose the right css configuration depending on the enviroment
 
     // ========= Enviroment configuration ========= \\
-    var API_URL;
-
     switch (enviroment){
     
-        case 'development':
+        case "development":
                 API_URL = "development API URL";
                 cssConfig = cssDev;
-
         break;
 
-        case 'production':
+        case "production":
                 API_URL = "production API URL";
                 cssConfig = cssProd;
         break;
@@ -46,14 +48,17 @@ var enviroment = process.env.NODE_ENV;
     
     module.exports = {
     	entry: {
-    		app: SRC_DIR + '/app/index.js'
+    		app: SRC_DIR + "/app/index.js"
     	},
     	output: {
             path: DIST_DIR,
-            filename: '[name].bundle.js' // THis goes to the dist folder and contains all the compiled js code
+            filename: "js/[name].bundle.min.js", // This goes to the dist folder and contains all the compiled js code
         },
         resolve: {
-            extensions: ['.js', '.jsx'],
+            extensions: [
+                ".js", 
+                ".jsx"
+            ]
         },
         module: {
             rules: [
@@ -62,7 +67,7 @@ var enviroment = process.env.NODE_ENV;
     		        use: cssConfig
                 },
                 { 
-                	test: /\.jsx?$/, // replace by jsx
+                	test: /\.jsx?$/, 
                 	exclude: /node_modules/, 
                 	use: "babel-loader" 
                 },
@@ -73,6 +78,14 @@ var enviroment = process.env.NODE_ENV;
                 		"file-loader?name=[hash:6].[ext]&outputPath=img/", // this will collect all the img and move them to dist
                 		"image-webpack-loader" // image optimization
                 	] 
+                },
+                { 
+                    test: /\.(woff2?|svg)$/, 
+                    use: "url-loader?limit=10000&name=fonts/[name].[ext]" 
+                },
+                { 
+                    test: /\.(ttf|eot)$/, 
+                    use: "file-loader?name=fonts/[name].[ext]" 
                 }
             ]
         },
@@ -83,29 +96,29 @@ var enviroment = process.env.NODE_ENV;
             hot: true,
             stats: "errors-only",
             open: true,
-            openPage: '' // Workaround to prevent the addition of "undefined" in the URL
+            openPage: "" // Workaround to prevent the addition of "undefined" in the URL
             // Link to issue on webpack-dev-server version: https://github.com/webpack/webpack-dev-server/issues/960
         },
     	plugins: [
     		new HtmlWebpackPlugin({
-                title: 'Project Demo', // The title for the HTML file
+                title: "React-Redux-Bootstrap Starter Kit", // The title for the HTML file
                 // favicon: '', // our project's favicon
                 minify: {
                     collapseWhitespace: true // Minify the HTML
                 },
-                hash: true, // Add a hash at the end of the script/linkk URL
-                chunks: ['app'], // this is just in case we run multimple entries. It picks up only app's chunks 
-                template: './src/index.html', // Load a custom template
+                hash: true, // Add a hash at the end of the script/link URL
+                // chunks: ["app"], // this is just in case we run multimple entries. It picks up only app's chunks 
+                template: "./src/index.html", // Load a custom template
             }),
             new ExtractTextPlugin({
-                filename: 'styles.css',
-                disable: !isProd,
+                filename: "./css/[name].min.css",
+                disable: enviroment !== "production",
                 allChunks: true
             }),
             new webpack.HotModuleReplacementPlugin(),
-            new PurifyCSSPlugin({
-             	paths: glob.sync(path.join(__dirname, 'src/*.html')), // given the case we are using an css library, it'll load only the css we need
-    	    }),
+            //    new PurifyCSSPlugin({
+            //     	paths: glob.sync(path.join(__dirname, 'src/*.html')), // given the case we are using an css library, it'll load only the css we need
+    	    // }),
     	    new webpack.DefinePlugin({ // this allows us to declare global variables as to acces them from our app
     			  _API: JSON.stringify(API_URL)
     		})

@@ -1,0 +1,12 @@
+html, body{
+	height: 100%;
+	min-height: 100%;
+	background: url('../img/img_logo.png') center center no-repeat;
+	background-color: $gray-base;
+}
+
+body{
+	h1{
+		color: green;
+	}
+}

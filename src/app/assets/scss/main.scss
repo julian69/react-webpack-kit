@@ -1,11 +1,2 @@
-html, body{
-	height: 100%;
-	min-height: 100%;
-	background: url('../img/img_logo.png') center center no-repeat;
-}
-
-body{
-	h1{
-		color: violet;
-	}
-}
+@import url(./base.scss);
+@import url(../../components/MainComponent/MainComponent.scss);
