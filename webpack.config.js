@@ -12,7 +12,6 @@ const path = require("path"),
 // ========= Check what enviroment we are in and set the values acordingly ========= \\ 
     
     let cssConfig, 
-        bootstrapConfig,
         API_URL;
 
     const cssDev = [ 
@@ -96,7 +95,8 @@ const path = require("path"),
             hot: true,
             stats: "errors-only",
             open: true,
-            // openPage: "" // Workaround to prevent the addition of "undefined" in the URL
+            historyApiFallback: true,
+            openPage: "" // Workaround to prevent the addition of "undefined" in the URL
             // Link to issue on webpack-dev-server version: https://github.com/webpack/webpack-dev-server/issues/960
         },
     	plugins: [
@@ -107,7 +107,7 @@ const path = require("path"),
                     collapseWhitespace: true // Minify the HTML
                 },
                 hash: true, // Add a hash at the end of the script/link URL
-                // chunks: ["app"], // this is just in case we run multimple entries. It picks up only app's chunks 
+                chunks: ["app"], // this is just in case we run multimple entries. It picks up only app's chunks 
                 template: "./src/index.html", // Load a custom template
             }),
             new ExtractTextPlugin({

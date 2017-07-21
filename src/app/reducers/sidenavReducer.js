@@ -1,16 +1,27 @@
 const sidenavReducer = (state = {
-    status: true
+  
+   isOpen: null,
+   isMobile: null
+
 }, action ) => {
 
     switch (action.type){
-        
-        case "TOGGLE_SIDENAV_FULFILLED":
+
+        case "SET_SIDENAV":
 
             state = {
                 ...state,
-                status: action.payload
+                isOpen: action.isOpen
             };
+            break;
+        
+        case "TOGGLE_SIDENAV":
 
+            state = {
+                ...state,
+                isOpen: action.isOpen,
+                isMobile: action.isMobile || state.isMobile
+            };
             break;
     }
 

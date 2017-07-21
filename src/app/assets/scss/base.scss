@@ -1,12 +1,12 @@
-html, body{
-	height: 100%;
-	min-height: 100%;
-	// background: url('../img/img_logo.png') center center no-repeat;
-	// background-color: $gray-base;
+body{
+	background-color: $gray-background;
 }
 
-body{
-	h1{
-		color: green;
-	}
+#snippets-container{
+	padding-top: 65px;
+	@include animate_open_default;
+
+	&.open{
+        margin-left: 250px;
+    }
 }

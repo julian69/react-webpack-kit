@@ -1,10 +1,16 @@
-export function sidenavActions(status){
+export function setidenav(isOpen, isMobile){
 	
 	return{
 		type: "TOGGLE_SIDENAV",
-		payload: new Promise( (resolve, reject) => {
-				resolve(status)
-		})
+		isOpen,
+		isMobile
 	}
 }
 
+export function toggleSidenav(isOpen){
+	
+	return{
+		type: "SET_SIDENAV",
+		isOpen
+	}
+}

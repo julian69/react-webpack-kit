@@ -1,34 +1,23 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
 export const Sidenav = (props) => {
     
-    let sidenavStatus =  props.sidenavStatus ?  'open' : 'close';
-
     return (
 
-        <nav id="mySidenav" className={`sidenav ${sidenavStatus}` }>
+        <nav id="site-sidenav" className={ `${props.sidenavStatusClass}` }>
             
-            <a href="#" 
-               className="closebtn" 
-               onClick={ props.toggleSidenavStatus } >
-                &times;
-            </a>
-
             <ul>
                 <li>
-                    <a href="#">Buttons</a>
-                </li>
-                <li>
-                    <a href="#">Forms</a>
-                </li>
-                <li>
-                    <a href="#">Colors</a>
-                </li>
-                <li>
-                    <a href="#">Accesibility</a>
+                    <NavLink to="/Snippets"
+                          activeClassName="active" 
+                          onClick={ () => props.toggleSidenav(false, true) } >
+                        Snippets
+                    </NavLink>
                 </li>
             </ul>
            
         </nav>
     );
 }
+

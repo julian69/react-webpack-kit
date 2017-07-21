@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import App from "./containers/AppContainer/AppContainer";
 import store from "./store";
 
-const css = require("./assets/scss/main.scss");
+require("./assets/scss/main.scss");
 
 render(
     <Provider store={store}>

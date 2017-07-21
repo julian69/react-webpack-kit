@@ -1,2 +1,7 @@
-@import url(./base.scss);
-@import url(../../components/SidenavComponent/SidenavComponent.scss);
+@import "./bootstrap-grid-system.css";
+@import "./variables.scss";
+@import "./mixins.scss";
+@import "./base.scss";
+@import "../../components/HeaderComponent/HeaderComponent.scss";
+@import "../../components/SidenavComponent/SidenavComponent.scss";
+@import "../../components/SnippetsComponent/SnippetsComponent.scss";
