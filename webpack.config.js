@@ -14,6 +14,7 @@ const path = require("path"),
     let cssConfig, 
         API_URL;
 
+    const isProd = enviroment === "production";
     const cssDev = [ 
         "style-loader", 
         "css-loader", 
@@ -26,7 +27,7 @@ const path = require("path"),
                               "css-loader", 
                               "sass-loader"
                           ],
-    			          // publicPath: '../' // This helped getting the images in the css files ( url(bla bla) )
+    			          publicPath: '../' // This helped getting the images in the css files ( url(bla bla) )
     		        });
 
     // ========= Enviroment configuration ========= \\
@@ -65,10 +66,19 @@ const path = require("path"),
                     test: /\.scss$/,
     		        use: cssConfig
                 },
+                {
+                    enforce: "pre",
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    loader: "eslint-loader",
+                    options: {
+                      fix: true
+                    }
+                },
                 { 
                 	test: /\.jsx?$/, 
                 	exclude: /node_modules/, 
-                	use: "babel-loader" 
+                    use: "babel-loader"
                 },
                 {
                 	test: /\.(jpe?g|png|gif|svg)$/i,
@@ -104,7 +114,7 @@ const path = require("path"),
                 title: "React-Redux-Bootstrap Starter Kit", // The title for the HTML file
                 // favicon: '', // our project's favicon
                 minify: {
-                    collapseWhitespace: true // Minify the HTML
+                    collapseWhitespace: isProd // Minify the HTML
                 },
                 hash: true, // Add a hash at the end of the script/link URL
                 chunks: ["app"], // this is just in case we run multimple entries. It picks up only app's chunks 
@@ -112,12 +122,12 @@ const path = require("path"),
             }),
             new ExtractTextPlugin({
                 filename: "./css/[name].min.css",
-                disable: enviroment !== "production",
+                disable: !isProd,
                 allChunks: true
             }),
             new webpack.HotModuleReplacementPlugin(),
-            //    new PurifyCSSPlugin({
-            //     	paths: glob.sync(path.join(__dirname, 'src/*.html')), // given the case we are using an css library, it'll load only the css we need
+         //       new PurifyCSSPlugin({
+         //        	paths: glob.sync(path.join(__dirname, 'src/*.html')), // given the case we are using an css library, it'll load only the css we need
     	    // }),
     	    new webpack.DefinePlugin({ // this allows us to declare global variables as to acces them from our app
     			  _API: JSON.stringify(API_URL)
