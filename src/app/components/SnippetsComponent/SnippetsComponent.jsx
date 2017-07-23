@@ -1,15 +1,9 @@
- import React from "react";
+import React from "react";
 
-export class Buttons extends React.Component {
+export class Snippets extends React.Component {
     render (){
         return (
-             <div id="buttons-component" className="container">
-                    <div className="row">
-                        <div className="col-xs-12">
-                            <h1>Buttons here !</h1>
-                        </div>
-                    </div>
-                </div>
+            <h1>Buttons here !</h1>
         );
     }
 }

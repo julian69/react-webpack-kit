@@ -1,0 +1,108 @@
+#plus-component.container {
+  margin: 1em;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  max-width: 58px;
+  padding: 0;
+  height: 56px;
+
+  @media screen and (max-width: 769px) {
+      display: none;
+  }
+
+  .circles:not(:last-of-type) {
+  	margin: 0 auto 20px;
+  }
+
+  &.open{
+    @include whenPlusOpen;
+  }
+
+  @media screen and (min-width: 769px) {
+    &:hover{
+      @include whenPlusOpen;
+    }
+  }
+
+  .circles {
+    display: initial;
+
+    @for $i from 2 through 6 {
+      &:nth-last-of-type(#{$i}) {
+        @include animate_hover_default;
+      }
+    }
+
+    background-color: $black-background;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    text-decoration: none;
+    position: relative;
+    border-radius: 50%;
+    box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px -7px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    position: relative;
+
+    &:nth-last-of-type(1) {
+      width: 56px;
+      height: 56px;
+      opacity: 1;
+      display: block;
+    }
+
+    svg{
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      // opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      box-shadow: 0 0 4px rgba(0,0,0,.14),
+      0 4px 8px rgba(0,0,0,.28);
+    }
+  }
+
+  span {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    
+    &.rotate {
+      background: $black-background url("http://goo.gl/EfgECT") center no-repeat;
+      position: absolute;
+      transform: rotate(90deg);
+      transition: .3s;
+    }
+  }
+
+  [data-tooltip]{
+   
+    &:before {
+      content: attr(data-tooltip);
+      background: $black-background;
+      padding: 5px 7px;
+      margin-right: 10px;
+      border-radius: 2px;
+      color: #FFF;
+      font: normal 12px $Lato;
+      white-space: nowrap;
+      position: absolute;
+      bottom: 20%;
+      right: 100%;
+      visibility: hidden;
+      opacity: 0;
+      transition: .3s;
+    }
+
+    &:hover:before {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+

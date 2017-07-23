@@ -11,5 +11,5 @@ render(
     <Provider store={store}>
         <App />
     </Provider>
-   , window.document.getElementById('app')
+    , window.document.getElementById("app")
 );

@@ -1,16 +1,9 @@
-export function setidenav(isOpen, isMobile){
+export function toggleSidenav(isOpen, isMobile){
 	
-	return{
-		type: "TOGGLE_SIDENAV",
-		isOpen,
-		isMobile
-	}
+    return{
+        type: "TOGGLE_SIDENAV",
+        isOpen,
+        isMobile
+    };
 }
 
-export function toggleSidenav(isOpen){
-	
-	return{
-		type: "SET_SIDENAV",
-		isOpen
-	}
-}

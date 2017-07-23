@@ -1,12 +1,3 @@
 body{
 	background-color: $gray-background;
 }
-
-#snippets-container{
-	padding-top: 65px;
-	@include animate_open_default;
-
-	&.open{
-        margin-left: 250px;
-    }
-}

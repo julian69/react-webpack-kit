@@ -8,7 +8,7 @@
 	.toggler{
         position: absolute;
         top:  50%;
-        left: 30px;
+        left: 20px;
         transform: translateY(-50%);
         padding: 11px 10px 6px 10px;
         margin: 0;
@@ -22,6 +22,7 @@
         &:focus{
         	outline: 0;
             background: rgba(255, 255, 255, .3);
+            cursor: pointer;
         }
 
 		.icon-bar{
