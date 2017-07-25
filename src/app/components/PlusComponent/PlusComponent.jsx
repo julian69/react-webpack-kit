@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Plus = (props) => {
-    console.log(props);
+    
     Plus.propTypes = {
         plusStatusClass: PropTypes.string,
         deviceStatusClass: PropTypes.string,

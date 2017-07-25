@@ -10,11 +10,11 @@
     }
     
     .plus{
-        background-color: $gray-plus-hover;
+        background-color: gray;
     }
     .rotate {
       transform: rotate(0deg);
-      background-color: $gray-plus-hover;
+      background-color: gray;
 
     }
 }
@@ -53,11 +53,11 @@
 
     @for $i from 2 through 6 {
       &:nth-last-of-type(#{$i}) {
-        @include animate_hover_default;
+        transition: ease .5 all;
       }
     }
   
-    background-color: $black-background;
+    background-color: #000000;
     cursor: pointer;
     text-decoration: none;
     position: relative;
@@ -92,10 +92,10 @@
     &:focus {
       box-shadow: 0 0 4px rgba(0,0,0,.14),
       0 4px 8px rgba(0,0,0,.28);
-      background-color: $gray-plus-hover;
+      background-color: gray;
 
       .rotate{
-        background-color: $gray-plus-hover;
+        background-color: gray;
       }
     }
   }
@@ -106,7 +106,7 @@
     border-radius: 50%;
     
     &.rotate {
-      background: $black-background url("http://goo.gl/EfgECT") center no-repeat;
+      background: #000000 url("http://goo.gl/EfgECT") center no-repeat;
       position: absolute;
       top: 0;
       left: 0;
@@ -119,7 +119,7 @@
    
     &:before {
       content: attr(data-tooltip);
-      background: $black-background;
+      background: #000000;
       padding: 5px 7px;
       margin-right: 10px;
       border-radius: 2px;
