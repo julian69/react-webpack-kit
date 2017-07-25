@@ -78,7 +78,9 @@ const path = require("path"),
                 { 
                 	test: /\.jsx?$/, 
                 	exclude: /node_modules/, 
-                    use: "babel-loader"
+                    use: [
+                        "babel-loader"
+                    ]
                 },
                 {
                 	test: /\.(jpe?g|png|gif|svg)$/i,

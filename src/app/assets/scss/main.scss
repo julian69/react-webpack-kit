@@ -2,7 +2,8 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 @import "./base.scss";
+@import "../../containers/AppContainer/AppContainer.scss";
 @import "../../components/HeaderComponent/HeaderComponent.scss";
 @import "../../components/SidenavComponent/SidenavComponent.scss";
 @import "../../components/PlusComponent/PlusComponent.scss";
-@import "../../components/SnippetsComponent/SnippetsComponent.scss";
+@import "../../components/ButtonsComponent/ButtonsComponent.scss";

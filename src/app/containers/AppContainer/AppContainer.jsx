@@ -18,7 +18,7 @@ import { switchDevice }  from "../../actions/plusActions";
 
 // Sections
 import { Home } from "../../components/HomeComponent/HomeComponent";
-import { Snippets } from "../../components/SnippetsComponent/SnippetsComponent";
+import { Buttons } from "../../components/ButtonsComponent/ButtonsComponent";
 
 class App extends React.Component {
 
@@ -59,7 +59,7 @@ class App extends React.Component {
         };
 
         const switchDevice = (device) => {
-            // this.props.plus.device = device;
+
             this.props.switchDevice(device);
         };
 
@@ -69,7 +69,7 @@ class App extends React.Component {
 
         return (
             <Router history={ browserHistory }>
-                <div>
+                <div id="app-container">
                     
                     <Header toggleSidenav={ toggleSidenav }
                         sidenavStatusClass={ sidenavStatusClass } />
@@ -77,18 +77,18 @@ class App extends React.Component {
                     <Sidenav toggleSidenav={ toggleSidenav }
                         sidenavStatusClass={ sidenavStatusClass } />
 
-                    <section id="snippets-wrapper" className={ sidenavStatusClass }>
+                    <section className={ `snippets-wrapper ${sidenavStatusClass}` }>
                         <div className={`container ${this.props.plus.device}` }>
                             <div className="row">
-                                <div className="col-xs-12">
+                                <div className="col-sm-10 .col-sm-offset-1">
                              
                                     <Route exact
                                         path="/" 
                                         component={ Home } />
 
                                     <Route exact
-                                        path="/snippets" 
-                                        component={ Snippets } />
+                                        path="/buttons" 
+                                        component={ Buttons } />
 
                                 </div>
                             </div>

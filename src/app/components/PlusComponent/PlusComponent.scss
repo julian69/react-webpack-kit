@@ -1,8 +1,29 @@
+@mixin whenPlusOpen {
+  height: auto;
+ 
+    .circles:not(:last-of-type) {
+      width: 40px;
+      height: 40px;
+      opacity: 1;
+      display: block;
+      margin-right: 13px;
+    }
+    
+    .plus{
+        background-color: $gray-plus-hover;
+    }
+    .rotate {
+      transform: rotate(0deg);
+      background-color: $gray-plus-hover;
+
+    }
+}
+
 #plus-component.container {
   margin: 1em;
   position: fixed;
   bottom: 0;
-  right: 0;
+  right: -3px;
   max-width: 58px;
   padding: 0;
   height: 56px;
@@ -20,24 +41,24 @@
   }
 
   @media screen and (min-width: 769px) {
-    &:hover{
+    &:hover,
+    &:focus{
       @include whenPlusOpen;
-    }
+     }
   }
 
   .circles {
-    display: initial;
+    border: none;
+    outline: 0;
 
     @for $i from 2 through 6 {
       &:nth-last-of-type(#{$i}) {
         @include animate_hover_default;
       }
     }
-
+  
     background-color: $black-background;
     cursor: pointer;
-    width: 35px;
-    height: 35px;
     text-decoration: none;
     position: relative;
     border-radius: 50%;
@@ -50,6 +71,13 @@
       height: 56px;
       opacity: 1;
       display: block;
+      position: absolute;
+      bottom: 0;
+      left: -3px;
+    }
+
+    &[data-tooltip="Desktop"]{
+      margin-bottom: 75px !important;
     }
 
     svg{
@@ -57,13 +85,18 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      // opacity: 0;
       transform: translate(-50%, -50%);
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       box-shadow: 0 0 4px rgba(0,0,0,.14),
       0 4px 8px rgba(0,0,0,.28);
+      background-color: $gray-plus-hover;
+
+      .rotate{
+        background-color: $gray-plus-hover;
+      }
     }
   }
 
@@ -75,6 +108,8 @@
     &.rotate {
       background: $black-background url("http://goo.gl/EfgECT") center no-repeat;
       position: absolute;
+      top: 0;
+      left: 0;
       transform: rotate(90deg);
       transition: .3s;
     }
@@ -99,10 +134,14 @@
       transition: .3s;
     }
 
-    &:hover:before {
+    &:hover:before,
+    &:focus:before {
       visibility: visible;
       opacity: 1;
     }
   }
 }
+
+
+
 

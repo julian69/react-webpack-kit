@@ -39,6 +39,14 @@
         left:  50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        outline: 0;
+
+        &:hover,
+        &:focus{
+            background: rgba(255, 255, 255, .3);
+            padding: 5px 15px 5px 15px;
+            border-radius: 5px;
+        }
     
     	@media screen and (max-width: 480px) {
 	    	max-width: 100px;

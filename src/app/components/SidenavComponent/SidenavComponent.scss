@@ -26,63 +26,47 @@
         list-style-type: none;
         padding: 0;
 
-        li{
-            padding: 8px 30px;
-            width: 100%;
+        li{ 
+            margin-bottom: 1px;
+            
+            a{
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 1.125em; // 18px;
+                color: $black-fonts;
+                display: block;
+                
 
-            div{
-                display: inline-block;
+                @media screen and (max-width: 767px) {
+                    opacity: 0;
+                    @include animate_open_default;
+                }
 
-                a{
-                    text-transform: capitalize;
-                    font-size: 1.375em; //22px;
-                    color: $black-fonts;
-                    text-decoration: none;
-                    position: relative;
-                    display: block;
+                @media screen and (min-width: 767px) {
+                    background: $white-background;
+                    background: linear-gradient(to left, $white-background 50%, $black-background 50%);
+                    background-size: 200% 100%;
+                    background-position:right bottom;
+                    transition: all .3s linear;
+                }
+                
+                &:hover,
+                &:focus,
+                &.active{
+                    color: $white-fonts;
                     outline: 0;
 
-                    &:before, 
-                    &:after {
-                        content: '';
-                        border-bottom: solid 1px $black-fonts;
-                        position: absolute;
-                        bottom: 0;
-                        width: 0;
+                    @media screen and (max-width: 767px) {
+                        background-color: $black-background;
                     }
 
-                    &:before { 
-                        left: 0; 
-                    }
-                    &:after { 
-                        right: 0; 
-                    }
-
-                    &:hover:before, 
-                    &:hover:after,
-                    &:focus:before, 
-                    &:focus:after{
-                      width: 50%;
-                    }
-
-                    &:before, 
-                    &:after{
-                       transition: all 0.5s ease;
-                    }
-
-                    &.active{
-                        &:before, 
-                        &:after {
-                            content: '';
-                            border-bottom: solid 1px $black-fonts;
-                            width: 50%;
-                        }
+                    @media screen and (min-width: 767px) {
+                        background-position:left bottom;
                     }
                 }
             }
         }
     }
 }
-
 
 
